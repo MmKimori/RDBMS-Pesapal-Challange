@@ -2,7 +2,7 @@
 
 **Pesapal Junior Developer '26 Challenge Submission**
 
----
+
 
 ## Overview
 
@@ -18,7 +18,7 @@ In addition to the database engine itself, the project includes:
 
 The focus throughout was correctness, readability, and adherence to the challenge requirements.
 
----
+
 
 ## Repository Structure
 
@@ -44,7 +44,7 @@ repo/
 └── requirements.txt
 ```
 
----
+
 
 ## System Architecture
 
@@ -117,7 +117,7 @@ The REPL provides an interactive way to work with the database:
   - `.quit` / `.exit` – exit the session
 - Query results are displayed as formatted text tables
 
----
+
 
 ## HTTP Server and Web Interface
 
@@ -156,7 +156,7 @@ The frontend is intentionally minimal and framework-free:
 
 The UI exists purely to demonstrate that the database engine works end-to-end.
 
----
+
 
 ## Design Decisions
 
@@ -182,7 +182,7 @@ Only basic `INNER JOIN` with equality predicates.
 
 These constraints were intentional to keep the implementation focused and readable.
 
----
+
 
 ## How to Run
 
@@ -230,7 +230,7 @@ From the UI you can:
 
 The frontend communicates with the backend using `fetch()` and JSON.
 
----
+
 
 ## Limitations and Future Improvements
 
@@ -242,7 +242,7 @@ The frontend communicates with the backend using `fetch()` and JSON.
 
 Possible extensions include persistence, additional SQL operators, concurrency, and more join types.
 
----
+
 
 ## Requirements / Dependencies
 
@@ -253,7 +253,7 @@ This project is intentionally built on **Python standard library only**:
 
 **Recommended Python version:** 3.9+
 
----
+
 
 ## Using This Project as a Learning Reference
 
@@ -266,7 +266,7 @@ This repository is suitable as a teaching / learning aid for:
 - How to design clean modules with clear responsibilities in Python
 - Building services in Python using **only the standard library**
 
----
+
 
 ## AI Usage Acknowledgment
 
@@ -277,3 +277,4 @@ An AI coding assistant (Cursor, powered by an OpenAI model) was used as a develo
 - Improving code structure and readability during iteration
 
 All architectural decisions, feature selection, constraint handling, and final code review were done manually to ensure the solution aligns with the Pesapal Junior Developer '26 challenge requirements.
+
