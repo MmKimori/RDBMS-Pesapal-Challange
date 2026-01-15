@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple In-Memory RDBMS Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Simple RDBMS Demo</h1>
+        <p>Users table backed by a custom Python in-memory database.</p>
+    </header>
+
+    <main>
+        <section class="panel">
+            <h2>Create / Edit User</h2>
+            <form id="user-form">
+                <div class="field">
+                    <label for="user-id">ID (INT, primary key)</label>
+                    <input id="user-id" name="id" type="number" required>
+                </div>
+                <div class="field">
+                    <label for="user-name">Name</label>
+                    <input id="user-name" name="name" type="text" required>
+                </div>
+                <div class="field">
+                    <label for="user-email">Email (unique)</label>
+                    <input id="user-email" name="email" type="email" required>
+                </div>
+                <div class="actions">
+                    <button type="submit">Save User</button>
+                    <button type="button" id="reset-btn" class="secondary">Reset</button>
+                </div>
+            </form>
+            <div id="message" class="message" aria-live="polite"></div>
+        </section>
+
+        <section class="panel">
+            <h2>Users</h2>
+            <button id="refresh-btn" class="secondary small">Refresh</button>
+            <table id="users-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <small>Pesapal Junior Developer '26 – custom in-memory RDBMS using Python standard library only.</small>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
