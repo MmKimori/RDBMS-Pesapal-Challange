@@ -1,13 +1,3 @@
-"""
-Table abstraction for the in-memory RDBMS.
-
-Responsibilities:
-- Maintain schema (column names, types, constraints)
-- Store rows in memory
-- Enforce PRIMARY KEY and UNIQUE constraints
-- Maintain hash indexes on constrained columns
-"""
-
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -44,12 +34,7 @@ class ColumnDef:
 
 @dataclass
 class Table:
-    """
-    Simple in-memory table.
 
-    Rows are stored as dicts mapping column name -> value.
-    Each row has an internal integer id used by indexes.
-    """
 
     name: str
     columns: List[ColumnDef]
@@ -71,9 +56,8 @@ class Table:
             if col.primary_key or col.unique:
                 self._indexes[col.name] = HashIndex(column=col.name, unique=True)
 
-    # ------------------------------------------------------------------
     # Utility helpers
-    # ------------------------------------------------------------------
+    
     def _normalize_row(self, row: Dict[str, Any]) -> Dict[str, Any]:
         normalized: Dict[str, Any] = {}
         col_map = {c.name: c for c in self.columns}
@@ -94,9 +78,8 @@ class Table:
                 return c
         raise KeyError(f"Column '{name}' does not exist in table '{self.name}'")
 
-    # ------------------------------------------------------------------
     # CRUD operations
-    # ------------------------------------------------------------------
+
     def insert(self, values: Dict[str, Any]) -> int:
         """
         Insert a new row and return its internal row id.
@@ -217,4 +200,5 @@ class Table:
         Convenience method, used by demos/tests.
         """
         return list(self.select())
+
 
