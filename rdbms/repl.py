@@ -1,13 +1,3 @@
-"""
-Interactive SQL-like REPL for the in-memory RDBMS.
-
-Usage:
-    python -m rdbms.repl
-
-Type SQL-like commands and press Enter. End statements with a semicolon.
-Type '.tables' to list tables, '.help' for help, '.quit' or Ctrl+C to exit.
-"""
-
 from __future__ import annotations
 
 import sys
@@ -113,4 +103,5 @@ def repl() -> None:
 
 if __name__ == "__main__":
     repl()
+
 
