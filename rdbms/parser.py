@@ -1,31 +1,3 @@
-"""
-Very small SQL-like parser for the in-memory RDBMS.
-
-Supported statements (simplified, case-insensitive keywords):
-
-    CREATE TABLE table_name (
-        col_name TYPE [PRIMARY KEY] [UNIQUE],
-        ...
-    );
-
-    INSERT INTO table_name (col1, col2, ...) VALUES (val1, val2, ...);
-
-    SELECT col1, col2 FROM table_name [WHERE col = value];
-
-    SELECT t1.col1, t2.col2
-      FROM table1
-      INNER JOIN table2
-        ON table1.colX = table2.colY;
-
-    UPDATE table_name SET col1 = val1, col2 = val2 [WHERE col = value];
-
-    DELETE FROM table_name [WHERE col = value];
-
-Notes:
-- Only '=' is supported in WHERE conditions.
-- String literals must be wrapped in single quotes; everything else is treated as INT where valid.
-"""
-
 from __future__ import annotations
 
 import re
@@ -63,24 +35,14 @@ class ParsedStatement:
 
 
 class Parser:
-    """
-    Very small hand-written parser that directly interacts with an Engine instance.
-    """
+    
 
     def __init__(self, engine: Engine) -> None:
         self.engine = engine
 
-    # ------------------------------------------------------------------
     # Public API
-    # ------------------------------------------------------------------
     def execute(self, sql: str) -> Union[List[Dict[str, Any]], int, None]:
-        """
-        Parse and execute a SQL-like statement.
-        Returns:
-            - list of rows for SELECT / JOIN
-            - affected row count for UPDATE / DELETE / INSERT
-            - None for DDL (CREATE TABLE)
-        """
+      
         sql = _strip_semi(sql)
         if not sql:
             return None
@@ -114,9 +76,9 @@ class Parser:
             )
         raise ValueError(f"Unsupported statement type: {kind}")
 
-    # ------------------------------------------------------------------
+    
     # Parsing
-    # ------------------------------------------------------------------
+ 
     def _parse(self, sql: str) -> ParsedStatement:
         upper = sql.upper()
         if upper.startswith("CREATE TABLE"):
@@ -133,7 +95,7 @@ class Parser:
             return self._parse_delete(sql)
         raise ValueError(f"Could not parse statement: {sql}")
 
-    # CREATE TABLE ------------------------------------------------------
+    # CREATE TABLE 
     def _parse_create_table(self, sql: str) -> ParsedStatement:
         m = re.match(r"CREATE\s+TABLE\s+([A-Za-z_][A-Za-z0-9_]*)\s*\((.*)\)\s*$", sql, re.IGNORECASE | re.DOTALL)
         if not m:
@@ -162,7 +124,7 @@ class Parser:
 
         return ParsedStatement("CREATE_TABLE", {"name": table_name, "columns": col_defs})
 
-    # INSERT ------------------------------------------------------------
+    # INSERT 
     def _parse_insert(self, sql: str) -> ParsedStatement:
         m = re.match(
             r"INSERT\s+INTO\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)\s*VALUES\s*\(([^)]*)\)\s*$",
@@ -185,7 +147,7 @@ class Parser:
 
         return ParsedStatement("INSERT", {"table": table, "values": values})
 
-    # SELECT (no join) --------------------------------------------------
+    # SELECT (no join)
     def _parse_select(self, sql: str) -> ParsedStatement:
         # SELECT cols FROM table [WHERE ...]
         m = re.match(
@@ -210,7 +172,7 @@ class Parser:
             {"table": table, "columns": columns, "where": where},
         )
 
-    # INNER JOIN --------------------------------------------------------
+    # INNER JOIN 
     def _parse_inner_join(self, sql: str) -> ParsedStatement:
         # SELECT cols FROM t1 INNER JOIN t2 ON t1.col = t2.col
         m = re.match(
@@ -265,7 +227,7 @@ class Parser:
             },
         )
 
-    # UPDATE ------------------------------------------------------------
+    # UPDATE 
     def _parse_update(self, sql: str) -> ParsedStatement:
         # UPDATE table SET col1 = val1, col2 = val2 [WHERE ...]
         m = re.match(
@@ -306,7 +268,7 @@ class Parser:
             {"table": table, "values": values, "where": where},
         )
 
-    # DELETE ------------------------------------------------------------
+    # DELETE 
     def _parse_delete(self, sql: str) -> ParsedStatement:
         # DELETE FROM table [WHERE ...]
         m = re.match(
@@ -321,7 +283,7 @@ class Parser:
         where = self._parse_where(where_str) if where_str else None
         return ParsedStatement("DELETE", {"table": table, "where": where})
 
-    # Helpers -----------------------------------------------------------
+    # Helpers
     def _parse_where(self, where_str: str) -> Tuple[str, str, Any]:
         # Only support "col = value"
         m = re.match(
@@ -358,4 +320,5 @@ class Parser:
         if current:
             parts.append("".join(current))
         return parts
+
 
