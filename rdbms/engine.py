@@ -1,12 +1,3 @@
-"""
-Core in-memory RDBMS engine.
-
-Responsibilities:
-- Manage tables
-- Execute parsed SQL-like commands
-- Coordinate joins
-"""
-
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -24,9 +15,7 @@ class Engine:
 
     tables: Dict[str, Table] = field(default_factory=dict)
 
-    # ------------------------------------------------------------------
-    # DDL
-    # ------------------------------------------------------------------
+
     def create_table(
         self,
         name: str,
@@ -48,9 +37,7 @@ class Engine:
         except KeyError as exc:
             raise ValueError(f"Table '{name}' does not exist") from exc
 
-    # ------------------------------------------------------------------
     # DML helpers called by parser
-    # ------------------------------------------------------------------
     def insert(self, table: str, values: Dict[str, Any]) -> int:
         return self.get_table(table).insert(values)
 
@@ -77,9 +64,9 @@ class Engine:
     ) -> int:
         return self.get_table(table).delete(where=where)
 
-    # ------------------------------------------------------------------
+
     # JOIN
-    # ------------------------------------------------------------------
+
     def inner_join(
         self,
         left_table: str,
@@ -91,4 +78,5 @@ class Engine:
         left = self.get_table(left_table)
         right = self.get_table(right_table)
         return inner_join(left, right, left_col, right_col, columns)
+
 
