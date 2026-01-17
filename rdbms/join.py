@@ -25,19 +25,7 @@ def inner_join(
     right_col: str,
     columns: List[Tuple[str, str]],
 ) -> List[Dict[str, Any]]:
-    """
-    Perform a basic INNER JOIN between two tables.
-
-    - `left`, `right`: tables
-    - `left_col`, `right_col`: column names to join on
-    - `columns`: list of (table_alias, column_name) pairs describing which columns to project.
-      The table_alias is either 'left' or 'right' for now, but the engine passes user-facing
-      table names and we map them accordingly.
-
-    Returns a list of row dicts where keys are "table.column" (fully qualified) to avoid clashes.
-    """
-    # Build an index on right.join_col for efficient lookup
-    # We do not reuse the regular HashIndex to avoid interfering with constraints.
+ 
     right_buckets = {}
     for _row_id, row in right._rows.items():  # type: ignore[attr-defined]
         key = row.get(right_col)
@@ -45,7 +33,6 @@ def inner_join(
 
     result: List[Dict[str, Any]] = []
 
-    # Iterate over left rows and probe into right side
     for _left_id, left_row in left._rows.items():  # type: ignore[attr-defined]
         key = left_row.get(left_col)
         matches = right_buckets.get(key, [])
@@ -57,7 +44,7 @@ def inner_join(
                 elif tbl_name == right.name:
                     value = right_row.get(col_name)
                 else:
-                    # Should not happen with a correct parser
+
                     raise ValueError(
                         f"Unknown table alias '{tbl_name}' in join projection; "
                         f"expected '{left.name}' or '{right.name}'"
@@ -65,4 +52,5 @@ def inner_join(
                 out[f"{tbl_name}.{col_name}"] = value
             result.append(out)
     return result
+
 
