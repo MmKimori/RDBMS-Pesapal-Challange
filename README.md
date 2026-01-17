@@ -16,9 +16,6 @@ In addition to the database engine itself, the project includes:
 - A lightweight HTTP server exposing CRUD operations
 - A minimal HTML/CSS/JavaScript frontend that interacts with the database over HTTP
 
-The focus throughout was correctness, readability, and adherence to the challenge requirements.
-
-
 
 ## Repository Structure
 
@@ -255,26 +252,15 @@ This project is intentionally built on **Python standard library only**:
 
 
 
-## Using This Project as a Learning Reference
-
-This repository is suitable as a teaching / learning aid for:
-
-- Core RDBMS concepts:
-  - Tables, rows, data types
-  - Primary keys and unique constraints
-  - Indexes and basic join strategies
-- How to design clean modules with clear responsibilities in Python
-- Building services in Python using **only the standard library**
-
-
-
 ## AI Usage Acknowledgment
 
 An AI coding assistant (Cursor, powered by an OpenAI model) was used as a development aid, primarily for:
 
-- Generating the initial web frontend skeleton
-- Assisting with debugging and fixing logic errors in the Python RDBMS code
-- Improving code structure and readability during iteration
+- Generating an initial HTML/CSS/JavaScript frontend skeleton
+- Helping debug and resolve runtime and logic errors in the Python code
+- Suggesting refactoring improvements to improve code readability and structure
+- Improving documentation clarity and organization during iteration
 
-All architectural decisions, feature selection, constraint handling, and final code review were done manually to ensure the solution aligns with the Pesapal Junior Developer '26 challenge requirements.
+All core system design decisions were done without the aid of AI tools.
+
 
