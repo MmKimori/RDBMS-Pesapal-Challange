@@ -16,6 +16,17 @@ In addition to the database engine itself, the project includes:
 - A lightweight HTTP server exposing CRUD operations
 - A minimal HTML/CSS/JavaScript frontend that interacts with the database over HTTP
 
+  ## AI Usage Acknowledgment
+
+An AI coding assistant (Cursor, powered by an OpenAI model) was used as a development aid, primarily for:
+
+- Generating an initial HTML/CSS/JavaScript frontend skeleton
+- Helping debug and resolve runtime and logic errors in the Python code
+- Suggesting refactoring improvements to improve code readability and structure
+- Improving documentation clarity and organization during iteration
+
+All core system design decisions were done without the aid of AI tools.
+
 
 ## Repository Structure
 
@@ -38,7 +49,6 @@ repo/
 │   └── app.js           # Browser-side logic using fetch()
 │
 ├── README.md
-└── requirements.txt
 ```
 
 
@@ -246,21 +256,8 @@ Possible extensions include persistence, additional SQL operators, concurrency, 
 This project is intentionally built on **Python standard library only**:
 
 - No external packages are required
-- The `requirements.txt` file exists for completeness but is effectively empty
-
 **Recommended Python version:** 3.9+
 
 
-
-## AI Usage Acknowledgment
-
-An AI coding assistant (Cursor, powered by an OpenAI model) was used as a development aid, primarily for:
-
-- Generating an initial HTML/CSS/JavaScript frontend skeleton
-- Helping debug and resolve runtime and logic errors in the Python code
-- Suggesting refactoring improvements to improve code readability and structure
-- Improving documentation clarity and organization during iteration
-
-All core system design decisions were done without the aid of AI tools.
 
 
