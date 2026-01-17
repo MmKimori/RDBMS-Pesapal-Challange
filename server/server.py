@@ -57,9 +57,8 @@ def _init_schema() -> None:
 class RequestHandler(BaseHTTPRequestHandler):
     server_version = "SimpleRDBMSServer/0.1"
 
-    # ------------------------------------------------------------------
     # Utility helpers
-    # ------------------------------------------------------------------
+    
     def _send_json(self, status: int, payload: Any) -> None:
         data = json.dumps(payload).encode("utf-8")
         self.send_response(status)
@@ -90,9 +89,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                 return None
         return None
 
-    # ------------------------------------------------------------------
     # Routing
-    # ------------------------------------------------------------------
+    
     def do_GET(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
         if self.path.startswith("/api/users"):
             if self.path.rstrip("/") == "/api/users":
@@ -206,7 +204,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             return
         self._send_json(HTTPStatus.NOT_FOUND, {"error": "Unknown endpoint"})
 
-    # Static file serving -----------------------------------------------
+    # Static file serving 
     def _serve_static(self) -> None:
         path = self.path.split("?", 1)[0]
         if path == "/" or path == "":
@@ -254,4 +252,5 @@ def run(host: str = "localhost", port: int = 8000) -> None:
 
 if __name__ == "__main__":
     run()
+
 
